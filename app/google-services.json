@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "194802308639",
+    "project_id": "pedoptadoptapet",
+    "storage_bucket": "pedoptadoptapet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194802308639:android:46cdd3246ea48dde43a72a",
+        "android_client_info": {
+          "package_name": "com.shankarlohar.pedopt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "194802308639-04bj8q0klio45ej2b2jjiqu15rf4u1ru.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZ0YS8rs-JgXhFm-cz3qohHbhRK0FrCT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "194802308639-04bj8q0klio45ej2b2jjiqu15rf4u1ru.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194802308639:android:8e35afbc918586d943a72a",
+        "android_client_info": {
+          "package_name": "com.shankarlohar.pedopt_adoptapet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "194802308639-04bj8q0klio45ej2b2jjiqu15rf4u1ru.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZ0YS8rs-JgXhFm-cz3qohHbhRK0FrCT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "194802308639-04bj8q0klio45ej2b2jjiqu15rf4u1ru.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
