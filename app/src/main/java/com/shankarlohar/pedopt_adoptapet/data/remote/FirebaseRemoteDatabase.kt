@@ -57,7 +57,6 @@ class FirebaseRemoteDatabase : RemoteDatabase {
         runCatching {
             // get the pet document from "petsAvailableForAdoption" collection"
             val petDocument = fireStore.collection(PETS_AVAILABLE_FOR_ADOPTION_COLLECTION_PATH)
-                .whereEqualTo("id", petId)
                 .get()
                 .await()
                 .documents
@@ -113,7 +112,6 @@ class FirebaseRemoteDatabase : RemoteDatabase {
     override fun listenForNotifications(currentUser: PedoptUser): LiveData<List<NotificationInfo>> {
         val liveData = MutableLiveData(emptyList<NotificationInfo>())
         fireStore.collection(RECENTLY_SENT_NOTIFICATIONS_COLLECTION_PATH)
-            .whereEqualTo("uid", currentUser.id)
             .addSnapshotListener { snapshot, exception ->
                 if (exception == null) {
                     liveData.value = snapshot!!.documents.map(DocumentSnapshot::toNotificationInfo)

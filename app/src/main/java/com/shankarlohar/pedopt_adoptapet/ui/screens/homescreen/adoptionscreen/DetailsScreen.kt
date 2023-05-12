@@ -1,5 +1,6 @@
 package com.shankarlohar.pedopt_adoptapet.ui.screens.homescreen.adoptionscreen
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn
@@ -18,13 +19,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
+import coil.request.ImageRequest
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
@@ -32,6 +36,8 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.shankarlohar.pedopt_adoptapet.data.domain.PetInfo
 import com.shankarlohar.pedopt_adoptapet.viewmodels.AdoptionScreenViewModel
 import com.google.accompanist.insets.navigationBarsPadding
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.shankarlohar.pedopt_adoptapet.R
 
 @ExperimentalAnimationApi
@@ -55,10 +61,16 @@ fun DetailsScreen(
             modifier = Modifier
                 .fillMaxHeight(0.6f)
                 .fillMaxWidth(),
-            painter = rememberImagePainter(petInfo.imageResource, builder = { crossfade(true) }),
+            painter = rememberAsyncImagePainter(
+                ImageRequest.Builder(LocalContext.current).data(data = petInfo.imageResource)
+                    .apply(block = fun ImageRequest.Builder.() {
+                        crossfade(true)
+                    }).build()
+            ),
             contentDescription = "",
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
         )
+
         Column(
             modifier = Modifier
                 .clip(

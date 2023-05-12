@@ -16,13 +16,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import com.google.accompanist.insets.statusBarsPadding
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.shankarlohar.pedopt_adoptapet.data.domain.PetInfo
 import com.shankarlohar.pedopt_adoptapet.ui.components.FilterChip
 import com.shankarlohar.pedopt_adoptapet.ui.components.PetCarouselCard
 import com.shankarlohar.pedopt_adoptapet.viewmodels.AdoptionScreenViewModel
-import com.google.accompanist.insets.statusBarsPadding
 import kotlinx.coroutines.launch
 
 @ExperimentalMaterialApi
@@ -144,8 +148,9 @@ private fun PetInfoCard(
     petInfo: PetInfo,
     isLiked: Boolean = false,
     onLikeButtonClicked: () -> Unit,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
+
     Card(
         modifier = Modifier.requiredHeight(80.dp),
         shape = MaterialTheme.shapes.small,
@@ -156,9 +161,11 @@ private fun PetInfoCard(
                 modifier = Modifier
                     .clip(MaterialTheme.shapes.small)
                     .weight(2f),
-                painter = rememberImagePainter(
-                    data = petInfo.imageResource,
-                    builder = { crossfade(true) }
+                painter = rememberAsyncImagePainter(
+                    ImageRequest.Builder(LocalContext.current).data(data = petInfo.imageResource)
+                        .apply(block = fun ImageRequest.Builder.() {
+                            crossfade(true)
+                        }).build()
                 ),
                 contentDescription = "",
                 contentScale = ContentScale.Crop,

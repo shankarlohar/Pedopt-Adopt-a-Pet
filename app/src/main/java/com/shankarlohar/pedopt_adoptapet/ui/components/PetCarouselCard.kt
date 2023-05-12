@@ -14,9 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
+import coil.request.ImageRequest
 import com.shankarlohar.pedopt_adoptapet.data.domain.PetInfo
 
 /**
@@ -47,9 +50,11 @@ fun PetCarouselCard(
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
                 modifier = Modifier.fillMaxSize(),
-                painter = rememberImagePainter(
-                    data = petInfo.imageResource,
-                    builder = { crossfade(true) }
+                painter = rememberAsyncImagePainter(
+                    ImageRequest.Builder(LocalContext.current).data(data = petInfo.imageResource)
+                        .apply(block = fun ImageRequest.Builder.() {
+                            crossfade(true)
+                        }).build()
                 ), // TODO Image Painter state referenced in intended stateless component
                 contentDescription = "",
                 contentScale = ContentScale.Crop,

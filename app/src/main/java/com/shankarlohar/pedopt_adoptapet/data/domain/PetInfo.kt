@@ -2,6 +2,7 @@ package com.shankarlohar.pedopt_adoptapet.data.domain
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
+import java.net.URL
 
 /**
  * This class is used to depict the entire profile of a pet.
